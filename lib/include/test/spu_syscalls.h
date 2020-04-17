@@ -65,4 +65,12 @@ static inline int spu_run(int fd, uint32_t *npc, uint32_t *status)
 	return syscall(SYS_spu_run, fd, npc, status);
 }
 
+
+struct linux_dirent {
+	unsigned long  d_ino;     /* Inode number */
+	unsigned long  d_off;     /* Offset to next linux_dirent */
+	unsigned short d_reclen;  /* Length of this linux_dirent */
+	char           d_name[];  /* Filename (null-terminated) */
+};
+
 #endif /* _SPU_SYSCALLS_H */

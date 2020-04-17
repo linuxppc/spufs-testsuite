@@ -29,7 +29,6 @@
 #include <sys/wait.h>
 #include <sys/syscall.h>
 #include <linux/types.h>
-#include <linux/dirent.h>
 #include <linux/unistd.h>
 
 #include <test/spu_syscalls.h>
@@ -47,7 +46,7 @@ static void do_creates(const char *name)
 	}
 }
 
-static int getdents(unsigned int fd, struct dirent *dirp, unsigned int count)
+static int getdents(unsigned int fd, struct linux_dirent *dirp, unsigned int count)
 {
 	return syscall(SYS_getdents, fd, dirp, count);
 }
@@ -55,7 +54,7 @@ static int getdents(unsigned int fd, struct dirent *dirp, unsigned int count)
 static void do_readdirs(void)
 {
 	int dir, rc;
-	struct dirent dirents[10];
+	struct linux_dirent dirents[10];
 
 	dir = open("/spu", O_RDONLY);
 	assert(dir >= 0);
